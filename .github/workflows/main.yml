@@ -191,4 +191,4 @@ jobs:
           with:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
-            message: Деплой прошёл успешно! $github.actor ${{ github.event.commits[0].message }} https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            message: Деплой прошёл успешно! Коммит [${{ github.event.commits[0].message }}](https://github.com/${{ github.repository }}/commit/${{github.sha}}) от [${{ github.actor }}](https://github.com/${{ github.actor }})  
