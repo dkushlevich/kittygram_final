@@ -192,11 +192,10 @@ jobs:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
             message: |
-              ${{ github.actor }} создал коммит:
+              ${{ github.actor }} создал коммит в репозиторий ${{ github.repository }}:
+
               Сообщение коммита: ${{ github.event.commits[0].message }}
-              
-              Репозиторий: ${{ github.repository }}
               
               Посмотреть изменения: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 
-              Деплой прощёл успешно!
+              Деплой прошёл успешно!
