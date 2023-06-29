@@ -191,4 +191,12 @@ jobs:
           with:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
-            message: Деплой прошёл успешно! Коммит [${{ github.event.commits[0].message }}](https://github.com/${{ github.repository }}/commit/${{github.sha}}) от [${{ github.actor }}](https://github.com/${{ github.actor }})  
+            message: |
+              ${{ github.actor }} создал коммит:
+              Сообщение коммита: ${{ github.event.commits[0].message }}
+              
+              Репозиторий: ${{ github.repository }}
+              
+              Посмотреть изменения: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
+              Деплой прощёл успешно!
