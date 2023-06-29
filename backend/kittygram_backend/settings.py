@@ -2,6 +2,11 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', '17tg!(#wd6k%%*+q5y%%hk&13i%(_3&pho6bw!pj_c1#3xe$5b')
@@ -54,15 +59,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 
 
+POSTGRES_SETTINGS = {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': os.getenv('POSTGRES_DB', 'django'),
+    'USER': os.getenv('POSTGRES_USER', 'django'),
+    'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
+    'HOST': os.getenv('DB_HOST', ''),
+    'PORT': os.getenv('DB_PORT', 5432)
+}
+
+SQLITE_SETTINGS = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': BASE_DIR / 'db.sqlite3',
+}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'django'),
-        'USER': os.getenv('POSTGRES_USER', 'django'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', ''),
-        'PORT': os.getenv('DB_PORT', 5432)
-    }
+    'default': (POSTGRES_SETTINGS, SQLITE_SETTINGS)[os.getenv('DATABASE') == 'sqlite']
 }
 
 
